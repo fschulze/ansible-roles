@@ -1,0 +1,11 @@
+---
+samba3:
+    workgroup: "WORKGROUP"
+    server string: "Samba Server"
+    security: "user"
+    log file: "/var/log/samba/log.%m"
+    max log size: "50"
+    dns proxy: "no"
+    socket options: "TCP_NODELAY"
+    unix extensions: "no"
+samba3_shares: {}

@@ -1,0 +1,7 @@
+---
+- pkgng:
+    name=samba36
+    state=present
+- name: Enable samba in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^samba_enable= line=samba_enable=\"YES\"
+  notify: restart samba

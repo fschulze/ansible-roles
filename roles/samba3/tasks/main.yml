@@ -1,0 +1,3 @@
+---
+- { include: samba3.yml, tags: samba }
+- { include: samba3_config.yml, tags: samba }

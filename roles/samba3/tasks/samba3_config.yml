@@ -1,0 +1,5 @@
+---
+- template:
+    src=smb.conf
+    dest=/usr/local/etc/smb.conf
+  notify: restart samba
