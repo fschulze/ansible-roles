@@ -1,0 +1,5 @@
+---
+- name: restart cron
+  service: name=cron state=restarted
+- name: restart syslogd
+  service: name=syslogd state=restarted

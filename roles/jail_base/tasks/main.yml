@@ -1,0 +1,11 @@
+---
+- name: Prevent rpc
+  lineinfile: dest=/etc/rc.conf regexp=^rpcbind_enable= line=rpcbind_enable=\"NO\"
+- name: Make sure rpcbind is not running
+  service: name=rpcbind state=stopped
+- name: Prevent loads of jails doing their cron jobs at the same time
+  lineinfile: dest=/etc/rc.conf regexp=^cron_flags= line=cron_flags=\"$cron_flags\ -J\ 15\"
+  notify: restart cron
+- name: Prevent syslog to open sockets
+  lineinfile: dest=/etc/rc.conf regexp=^syslogd_flags= line=syslogd_flags=\"-ss\"
+  notify: restart syslogd
