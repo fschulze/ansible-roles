@@ -29,6 +29,12 @@ This sets up `samba`_.
 See ``roles/samba3/defaults/main.yml`` for the default settings.
 You can change those in your host_vars, but you have to copy the existing ones.
 
+Users
+-----
+
+By default samba is configured to use unix users, but with it's own password db.
+So you first have to add a unix user and then use ``pdbedit -a -u [username]`` to set the password.
+
 Declaring shares
 ----------------
 
