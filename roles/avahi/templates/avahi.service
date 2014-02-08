@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+
+<!-- See avahi.service(5) for more information about this configuration file -->
+
+<service-group>
+
+  <name replace-wildcards="yes">{{ avahi_service_host_name|default('%h') }}</name>
+
+{% for service in avahi_services_info %}
+  <service>
+{% for key, value in service.items() %}
+    <{{ key }}>{{ value }}</{{ key }}>
+{% endfor %}
+  </service>
+{% endfor %}
+
+</service-group>

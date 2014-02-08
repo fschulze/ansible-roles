@@ -1,0 +1,3 @@
+---
+- include: avahi.yml
+- include: nss_mdns.yml

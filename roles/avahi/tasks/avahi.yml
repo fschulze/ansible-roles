@@ -1,0 +1,18 @@
+---
+- pkgng:
+    name=avahi-app
+    state=present
+- name: Enable dbus in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^dbus_enable= line=dbus_enable=\"YES\"
+  notify: restart network
+- name: Enable avahi-daemon in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^avahi_daemon_enable= line=avahi_daemon_enable=\"YES\"
+  notify: restart network
+- name: Start dbus
+  service:
+    name=dbus
+    state=started
+- name: Start avahi-daemon
+  command: service avahi-daemon onestart
+  register: command_result
+  failed_when: "command_result.rc != 0 and 'Daemon already running on' not in command_result.stderr"

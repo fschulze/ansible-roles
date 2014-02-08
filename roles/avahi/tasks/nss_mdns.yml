@@ -1,0 +1,7 @@
+---
+- pkgng:
+    name=nss_mdns
+    state=present
+- name: Add mdns to nsswitch.conf hosts config
+  lineinfile: "dest=/etc/nsswitch.conf regexp=^hosts: line='hosts: {{ nss_hosts_with_mdns }}'"
+  notify: restart network

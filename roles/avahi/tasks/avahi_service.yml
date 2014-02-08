@@ -1,0 +1,6 @@
+---
+- template:
+    src=avahi.service
+    dest=/usr/local/etc/avahi/services/{{ avahi_service_name }}.service
+    mode=444
+  notify: restart avahi
