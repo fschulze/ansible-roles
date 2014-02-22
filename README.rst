@@ -21,6 +21,13 @@ To publish a Bonjour service, use something like this::
                 txt-record: model=Xserve }]}
 
 
+Periodic with anacron
+=====================
+
+This sets everything up, so periodic tasks are run by anacron.
+This is useful for systems that don't run 24/7.
+
+
 Samba3
 ======
 

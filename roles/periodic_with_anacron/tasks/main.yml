@@ -1,0 +1,14 @@
+---
+- name: Ensure anacron is installed
+  pkgng: name=anacron state=present
+
+- name: Disable periodic daily in crontab
+  lineinfile: dest=/etc/crontab backrefs=yes regexp='^#?(.*periodic\s*daily)\s*$' line="#\1"
+- name: Disable periodic weekly in crontab
+  lineinfile: dest=/etc/crontab backrefs=yes regexp='^#?(.*periodic\s*weekly)\s*$' line="#\1"
+- name: Disable periodic monthly in crontab
+  lineinfile: dest=/etc/crontab backrefs=yes regexp='^#?(.*periodic\s*monthly)\s*$' line="#\1"
+- name: Add anacron to crontab
+  lineinfile: "dest=/etc/crontab line='0\t0\t*\t*\t*\troot\t/usr/local/sbin/anacron'"
+- name: Enable anacron in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^anacron_enable= line=anacron_enable=\"YES\"
