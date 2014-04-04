@@ -1,0 +1,7 @@
+---
+- name: "{{ user }} postgresql role"
+  postgresql_user:
+    name={{ user }}
+    db=postgres
+    role_attr_flags=NOCREATEROLE,CREATEDB,NOSUPERUSER
+    login_user=pgsql

@@ -1,0 +1,40 @@
+---
+# The pgsql_user_group_id must be unique on the whole jail host, otherwise there
+# will be errors in the form of:
+# semctl(10223622, 3, SETVAL, 0) failed: Invalid argument
+- name: Setup pgsql group
+  group:
+    name=pgsql
+    gid={{ pgsql_user_group_id }}
+- name: Setup pgsql user
+  user:
+    name=pgsql
+    uid={{ pgsql_user_group_id }}
+    group=pgsql
+    comment="PostgreSQL pseudo-user"
+    home=/usr/local/pgsql
+    createhome=no
+    shell=/bin/sh
+
+- name: Install postgresql packages
+  pkgng:
+    name={{ item }}
+    state=present
+  with_items:
+    - "{{ postgresql_package_prefix }}-server"
+
+- name: Setup postgresql to start on boot
+  lineinfile: dest=/etc/rc.conf regexp=^postgresql_enable= line=postgresql_enable=\"YES\"
+
+- name: Set owner on pgsql data dir
+  file:
+    dest=/usr/local/pgsql
+    owner=pgsql
+    group=pgsql
+- name: Create DB files
+  command: service postgresql initdb creates=/usr/local/pgsql/data
+
+- name: Start postgresql
+# The postgresql pg_ctl command seems to mess around with stderr causing a
+# hang in the service module of ansible, this is the workaround for that.
+  raw: service postgresql onestatus || service postgresql onestart
