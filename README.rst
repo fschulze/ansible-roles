@@ -1,7 +1,7 @@
 .. contents:: Table of Contents
 
-Avahi
-=====
+bsd_avahi
+=========
 
 This sets up `avahi`_ and `nss_mdns`_.
 
@@ -23,15 +23,15 @@ To publish a Bonjour service, use something like this::
                 txt-record: model=Xserve }]}
 
 
-Periodic with anacron
-=====================
+bsd_periodic_with_anacron
+=========================
 
 This sets everything up, so periodic tasks are run by anacron.
 This is useful for systems that don't run 24/7.
 
 
-Postgresql
-==========
+bsd_postgresql
+==============
 
 This sets up `postgresql`_.
 The id of the user and group for postgresql must be unique on the whole jail host.
@@ -71,8 +71,8 @@ The ZFS default of 128K could cause a too long delay before data is written to d
 Since postgresql implements it's own caching, we only cache metadata.
 
 
-Samba3
-======
+bsd_samba3
+==========
 
 This sets up `samba`_.
 
