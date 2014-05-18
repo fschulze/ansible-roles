@@ -102,3 +102,9 @@ In your host_vars use something like this::
 .. _nss_mdns: http://0pointer.de/lennart/projects/nss-mdns/
 .. _postgresql: http://www.postgresql.org
 .. _samba: http://www.samba.org
+
+
+bsd_ssh_nodns
+=============
+
+Turns off DNS lookup of connecting ssh client.
