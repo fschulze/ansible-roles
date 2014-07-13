@@ -3,7 +3,7 @@
 bsd_avahi
 =========
 
-This sets up `avahi`_ and `nss_mdns`_.
+This sets up `avahi`_ and `nss_mdns`_. It must be installed in a jail *host*, not inside a jail.
 
 Publish Bonjour services
 ------------------------
